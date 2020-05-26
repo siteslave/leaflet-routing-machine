@@ -8,7 +8,7 @@
    stepToText option in the OSRMv1 class.
 */
 
-(function() {
+(function () {
 	'use strict';
 
 	var spanish = {
@@ -50,7 +50,7 @@
 			'EndOfRoad': ['Gira {modifier} al final de la carretera', ' hacia {road}'],
 			'Onto': 'hacia {road}'
 		},
-		formatOrder: function(n) {
+		formatOrder: function (n) {
 			return n + 'º';
 		},
 		ui: {
@@ -72,7 +72,7 @@
 	L.Routing = L.Routing || {};
 
 	var Localization = L.Class.extend({
-		initialize: function(langs) {
+		initialize: function (langs) {
 			this._langs = L.Util.isArray(langs) ? langs.slice() : [langs, 'en'];
 
 			for (var i = 0, l = this._langs.length; i < l; i++) {
@@ -87,7 +87,7 @@
 			}
 		},
 
-		localize: function(keys) {
+		localize: function (keys) {
 			var dict,
 				key,
 				value;
@@ -110,6 +110,67 @@
 	});
 
 	module.exports = L.extend(Localization, {
+		'th': {
+			directions: {
+				N: 'ทิศเหนือ',
+				NE: 'ทิศตะวันออกเฉียงเหนือ',
+				E: 'ทิศตะวันออก',
+				SE: 'ทิศตะวันออกเฉียงใต้',
+				S: 'ทิศใต้',
+				SW: 'ทิศตะวันตกเฉียงใต้',
+				W: 'ทิศตะวันตก',
+				NW: 'ทิศตะวันตกเฉียงเหนือ',
+				SlightRight: 'เลี้ยวขวาเล็กน้อย',
+				Right: 'ขวา',
+				SharpRight: 'เลี้ยวขวาหักศอก',
+				SlightLeft: 'เลี้ยวซ้ายเล็กน้อย',
+				Left: 'เลี้ยวซ้าย',
+				SharpLeft: 'เลี้ยวซ้ายหักศอก',
+				Uturn: 'เลี้ยวกลับ'
+			},
+			instructions: {
+				// instruction, postfix if the road is named
+				'ตรงไป':
+					['ตรวไปตาม {dir}', ' บน {road}'],
+				'ไปตามทาง':
+					['Continue {dir}'],
+				'เลี้ยวกลับ':
+					['เลี้ยวกลับ'],
+				'WaypointReached':
+					['Waypoint reached'],
+				'Roundabout':
+					['Take the {exitStr} exit in the roundabout', ' onto {road}'],
+				'DestinationReached':
+					['Destination reached'],
+				'Fork': ['At the fork, turn {modifier}', ' onto {road}'],
+				'Merge': ['Merge {modifier}', ' onto {road}'],
+				'OnRamp': ['Turn {modifier} on the ramp', ' onto {road}'],
+				'OffRamp': ['Take the ramp on the {modifier}', ' onto {road}'],
+				'EndOfRoad': ['Turn {modifier} at the end of the road', ' onto {road}'],
+				'Onto': 'onto {road}'
+			},
+			formatOrder: function (n) {
+				var i = n % 10 - 1,
+					suffix = ['st', 'nd', 'rd'];
+
+				return suffix[i] ? n + suffix[i] : n + 'th';
+			},
+			ui: {
+				startPlaceholder: 'Start',
+				viaPlaceholder: 'Via {viaNumber}',
+				endPlaceholder: 'End'
+			},
+			units: {
+				meters: 'ม.',
+				kilometers: 'กม.',
+				yards: 'yd',
+				miles: 'ไมล์',
+				hours: 'ชั่วโมง',
+				minutes: 'นาที',
+				seconds: 'วินาที'
+			}
+		},
+
 		'en': {
 			directions: {
 				N: 'north',
@@ -149,9 +210,9 @@
 				'EndOfRoad': ['Turn {modifier} at the end of the road', ' onto {road}'],
 				'Onto': 'onto {road}'
 			},
-			formatOrder: function(n) {
+			formatOrder: function (n) {
 				var i = n % 10 - 1,
-				suffix = ['st', 'nd', 'rd'];
+					suffix = ['st', 'nd', 'rd'];
 
 				return suffix[i] ? n + suffix[i] : n + 'th';
 			},
@@ -222,7 +283,7 @@
 				'EndOfRoad': ['Fahren Sie {modifier} am Ende der Straße', ' auf {road}'],
 				'Onto': 'auf {road}'
 			},
-			formatOrder: function(n) {
+			formatOrder: function (n) {
 				return n + '.';
 			},
 			ui: {
@@ -283,7 +344,7 @@
 				'EndOfRoad': ['Sväng {modifier} vid vägens slut', ' till {road}'],
 				'Onto': 'till {road}'
 			},
-			formatOrder: function(n) {
+			formatOrder: function (n) {
 				return ['första', 'andra', 'tredje', 'fjärde', 'femte',
 					'sjätte', 'sjunde', 'åttonde', 'nionde', 'tionde'
 					/* Can't possibly be more than ten exits, can there? */][n - 1];
@@ -297,7 +358,7 @@
 
 		'es': spanish,
 		'sp': spanish,
-		
+
 		'nl': {
 			directions: {
 				N: 'noordelijke',
@@ -336,7 +397,7 @@
 				'DestinationReached':
 					['Aangekomen op eindpunt'],
 			},
-			formatOrder: function(n) {
+			formatOrder: function (n) {
 				if (n === 1 || n >= 20) {
 					return n + 'ste';
 				} else {
@@ -387,7 +448,7 @@
 				'DestinationReached':
 					['Destination atteinte'],
 			},
-			formatOrder: function(n) {
+			formatOrder: function (n) {
 				return n + 'º';
 			},
 			ui: {
@@ -434,7 +495,7 @@
 				'DestinationReached':
 					['Destinazione raggiunta'],
 			},
-			formatOrder: function(n) {
+			formatOrder: function (n) {
 				return n + 'º';
 			},
 			ui: {
@@ -494,7 +555,7 @@
 				'EndOfRoad': ['Vire {modifier} no fim da rua', ' na {road}'],
 				'Onto': 'na {road}'
 			},
-			formatOrder: function(n) {
+			formatOrder: function (n) {
 				return n + 'º';
 			},
 			ui: {
@@ -541,9 +602,9 @@
 				'DestinationReached':
 					['Prišli ste do cieľa.'],
 			},
-			formatOrder: function(n) {
+			formatOrder: function (n) {
 				var i = n % 10 - 1,
-				suffix = ['.', '.', '.'];
+					suffix = ['.', '.', '.'];
 
 				return suffix[i] ? n + suffix[i] : n + '.';
 			},
@@ -591,7 +652,7 @@
 				'DestinationReached':
 					['Φτάσατε στον προορισμό σας'],
 			},
-			formatOrder: function(n) {
+			formatOrder: function (n) {
 				return n + 'º';
 			},
 			ui: {
@@ -638,7 +699,7 @@
 				'EndOfRoad': ['Gira {modifier} al final de la carretera', ' cap a {road}'],
 				'Onto': 'cap a {road}'
 			},
-			formatOrder: function(n) {
+			formatOrder: function (n) {
 				return n + 'º';
 			},
 			ui: {
@@ -706,7 +767,7 @@
 				'EndOfRoad': ['Поверните {modifier} в конце дороги', ' на {road}'],
 				'Onto': 'на {road}'
 			},
-			formatOrder: function(n) {
+			formatOrder: function (n) {
 				return n + '-й';
 			},
 			ui: {
@@ -724,8 +785,8 @@
 				seconds: 'с'
 			}
 		},
-                
-                'pl': {
+
+		'pl': {
 			directions: {
 				N: 'północ',
 				NE: 'północny wschód',
@@ -764,7 +825,7 @@
 				'EndOfRoad': ['Skręć {modifier} na końcu drogi', ' na {road}'],
 				'Onto': 'na {road}'
 			},
-			formatOrder: function(n) {
+			formatOrder: function (n) {
 				return n + '.';
 			},
 			ui: {
